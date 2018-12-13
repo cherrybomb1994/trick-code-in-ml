@@ -111,6 +111,8 @@ def main():
 
     predictionAndLabels.map(lambda x: (x[1], x[0])).toDF(["prediction", "label"]).createGlobalTempView("mytest")
     sqlContext = SQLContext(sc)
+    
+    #下面这段本意是统计混淆矩阵，实现的比较蠢，参考spark_FM.py
     tp = sqlContext.sql(
         "select count(*) from global_temp.mytest t1 where t1.prediction = t1.label and t1.prediction = 1.0").collect()
     fp = sqlContext.sql(
@@ -126,7 +128,9 @@ def main():
 
     percent = float(tp_tmp[0]) / (float(tp_tmp[0]) + float(fp_tmp[0]) + 1)
     recall = float(tp_tmp[0]) / (float(tp_tmp[0]) + float(fn_tmp[0]) + 1)
-
+    ######
+    
+    
     weight_list = model.weights
     weight_dit = {}
     for i in range(len(weight_list)):
