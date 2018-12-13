@@ -135,7 +135,7 @@ object LRTrainDriver {
     println("********************************************************")
     println()
 
-    //val resultPath = "hdfs://hadoop-meituan/user/hadoop-gct/anruiqi/pySpark_Tmp/"
+    //val resultPath = "pySpark_Tmp/"
     //testPredictionAndLabels.saveAsTextFile(resultPath)
     // Shutdown
     sc.stop()
